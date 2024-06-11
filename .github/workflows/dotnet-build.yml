@@ -1,29 +1,13 @@
-name: Atividade4_GitHub_Actions
+runs-on: ubuntu-latest
 
-on:
-  push:
-      branches:
-        -main
-
-  schedule:   
-    - cron: '30 08 * *' # every day 08:30 UTC
-
-jobs:
-  Build:
-
-    runs-on: ubutun-latest
-
-    steps:
-      -name: 'Ckeckout Github Action'
-        uses: actions/checkout@v4
-
-        -name: Set up NET core
-          uses: actions/setup-dotnet@v1
-          white:
-            dotnet-version '8.0.X'
-            
-            -name: Build and publish with dotnet
-              working-directory: src/Tailwind.Traders.web
-              run: |
-                dotnet build --configuration Realese
+steps:
+- uses: actions/checkout@v4
+- name: Setup .NET
+  uses: actions/setup-dotnet@v4
+  with:
+    dotnet-version: 8.0.x
+- name: Restore dependencies
+  run: dotnet restore **/*.csproj
+- name: Build
+  run: dotnet build **/*.csproj --no-restore
       
