@@ -1,26 +1,32 @@
-name: github-actions .NET
+name: Módulo4_GitHub_actions
 
 on:
-push:
-branches: [ "main" ]
-pull_request:
-branches: [ "main" ]
-schedule:
-- cron: '0 0 * * 1'
+  push:
+    branches:
+    - '*'
+
+  pull_request:
+    branches:
+      - '*'
+  
+  schedule:
+    - cron: '0 0 * * *'
 
 jobs:
-build:
+  build:
 
-runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-steps:
-- uses: actions/checkout@v4
-- name: Setup .NET
-  uses: actions/setup-dotnet@v4
-  with:
-    dotnet-version: 8.0.x
-- name: Restore dependencies
-  run: dotnet restore **/*.csproj
-- name: Build
-  run: dotnet build **/*.csproj --no-restore
-      
+    steps:
+      - name: 'Checkout GitHub Action'
+        uses: actions/checkout@v4
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore **/*.csproj
+      - name: Build
+        run: dotnet build **/*.csproj --no-restore
