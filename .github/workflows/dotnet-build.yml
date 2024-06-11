@@ -13,7 +13,7 @@ jobs:
 
     runs-on: ubutun-latest
 
-    stepes:
+    steps:
       -name: 'Ckeckout Github Action'
         uses: actions/checkout@v4
 
